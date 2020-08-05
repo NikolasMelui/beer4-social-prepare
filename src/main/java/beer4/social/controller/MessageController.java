@@ -1,6 +1,8 @@
 package beer4.social.controller;
 
+import beer4.social.exceptions.NotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +22,12 @@ public class MessageController {
     }};
 
     @GetMapping()
-    public List<Map<String, String>> list() {
+    public List<Map<String, String>> getMessages() {
         return messages;
+    }
+
+    @GetMapping("{id}")
+    public Map<String, String> getMessageById (@PathVariable String id) {
+        return messages.stream().filter(message -> message.get("id").equals(id)).findFirst().orElseThrow(NotFoundException::new);
     }
 }
