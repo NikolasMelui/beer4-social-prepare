@@ -36,4 +36,12 @@ public class MessageController {
         messages.add(message);
         return message;
     }
+
+    @PutMapping("{id}")
+    public Map<String, String> updateMessage(@PathVariable String id, @RequestBody Map<String, String> message) {
+        Map<String, String> currentMessage = getMessageById(id);
+        currentMessage.putAll(message);
+        currentMessage.put("id", id);
+        return currentMessage;
+    }
 }
