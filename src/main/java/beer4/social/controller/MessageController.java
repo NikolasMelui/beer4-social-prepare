@@ -44,4 +44,11 @@ public class MessageController {
         currentMessage.put("id", id);
         return currentMessage;
     }
+
+    @DeleteMapping("{id}")
+    public int deleteMessage(@PathVariable String id) {
+        Map<String, String> message = getMessageById(id);
+        messages.remove(message);
+        return 1;
+    }
 }
