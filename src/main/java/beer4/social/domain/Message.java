@@ -3,6 +3,7 @@ package beer4.social.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -12,4 +13,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
+
+    @Column(updatable = false)
+    private LocalDateTime creationDate;
 }
